@@ -1,11 +1,24 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import feedbackRate from './../feedbackRate';
 
-const Statistic = ({ good, neutral, bad }) => (
+const Statistic = ({ good, neutral, bad, total, positivePercentage }) => (
   <>
-    <span>Good: {good}</span>
-    <span>Neutral: {neutral}</span>
-    <span>Bad: {bad}</span>
+    <span>
+      {feedbackRate.positive}: {good}
+    </span>
+    <span>
+      {feedbackRate.middle}: {neutral}
+    </span>
+    <span>
+      {feedbackRate.negative}: {bad}
+    </span>
+    <span>
+      {feedbackRate.general}: {total}
+    </span>
+    <span>
+      {feedbackRate.percentagePositive}: {positivePercentage}%
+    </span>
+
   </>
 );
 

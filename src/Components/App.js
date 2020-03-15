@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Section from './Section/Section';
 import FeedbackOptions from './FeedbackOptions/FeedbackOptions';
 import Statistics from './Statistics/Statistics';
-import feedbackRate from './feedbackRate'
+import feedbackRate from './feedbackRate';
 
 export default class App extends Component {
   static defaultProps = {
@@ -37,47 +37,38 @@ export default class App extends Component {
       case feedbackRate.negative:
         this.setState(state => ({ bad: state.bad + this.props.step }));
         return;
+      default:
+        alert('Please check default settings');
     }
   };
 
+  countTotalFeedback = () =>
+    this.state.good + this.state.neutral + this.state.bad;
+
+  countPositiveFeedbackPercentage = () =>
+    this.countTotalFeedback() === 0
+      ? 0
+      : (this.state.good * 100) / this.countTotalFeedback();
+
   render() {
-    // const { good, neutral, bad } = this.state;
-    // const { step } = this.props;
+    const total = this.countTotalFeedback();
+    const positivePercentage = Math.round(
+      this.countPositiveFeedbackPercentage(),
+    );
     return (
       <>
         <Section title="Please leave your feedback">
-          <FeedbackOptions onIncrement = {this.handleIncrement} />
+          <FeedbackOptions onIncrement={this.handleIncrement} />
         </Section>
 
         <Section title="Statistics">
-          <Statistics {...this.state}/>
+          <Statistics
+            {...this.state}
+            total={total}
+            positivePercentage={positivePercentage}
+          />
         </Section>
-        {/* <span>Good: {good}</span>
-        <span>Neutral: {neutral}</span>
-        <span>Bad: {bad}</span> */}
-        {/* <button type="button" onClick={this.handleIncrement}>
-              Good
-            </button>
-            <button type="button" onClick={this.handleIncrement}>
-              Neutral
-            </button>
-            <button type="button" onClick={this.handleIncrement}>
-              Bad
-            </button> */}
       </>
     );
   }
-}
-{
-  /* <>
-<Section title = "Please leave your feedback">
- <FeedbackOptions onIncrement ={this.handleIncrement}/>
-</Section>
-
-<Section title = "Statistics">
-<Statistics/>
-</Section>
-
-</>
-); */
 }
