@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Section from './Section/Section';
 import FeedbackOptions from './FeedbackOptions/FeedbackOptions';
 import Statistics from './Statistics/Statistics';
+import Notification from './Notification/Notification';
 import feedbackRate from './feedbackRate';
 
 export default class App extends Component {
@@ -62,11 +63,15 @@ export default class App extends Component {
         </Section>
 
         <Section title="Statistics">
-          <Statistics
-            {...this.state}
-            total={total}
-            positivePercentage={positivePercentage}
-          />
+          {total === 0 ? (
+            <Notification message="No feedback given" />
+          ) : (
+            <Statistics
+              {...this.state}
+              total={total}
+              positivePercentage={positivePercentage}
+            />
+          )}
         </Section>
       </>
     );

@@ -3,7 +3,7 @@ const feedbackRate = {
   middle: 'Neutral',
   negative: 'Bad',
   general: 'Total',
-  percentagePositive: 'Positive feedback' 
+  percentagePositive: 'Positive feedback',
 };
 
 export default feedbackRate;

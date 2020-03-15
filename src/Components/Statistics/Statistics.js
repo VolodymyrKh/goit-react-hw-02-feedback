@@ -1,8 +1,10 @@
 import React from 'react';
 import feedbackRate from './../feedbackRate';
+import styles from './Statistics.module.css';
+
 
 const Statistic = ({ good, neutral, bad, total, positivePercentage }) => (
-  <>
+  <div className={styles.wrapper}>
     <span>
       {feedbackRate.positive}: {good}
     </span>
@@ -19,7 +21,7 @@ const Statistic = ({ good, neutral, bad, total, positivePercentage }) => (
       {feedbackRate.percentagePositive}: {positivePercentage}%
     </span>
 
-  </>
+  </div>
 );
 
 export default Statistic;
