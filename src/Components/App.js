@@ -6,50 +6,46 @@ import Statistics from './Statistics/Statistics';
 import Notification from './Notification/Notification';
 import feedbackRate from './feedbackRate';
 
+const good = feedbackRate.positive.toLowerCase();
+const neutral = feedbackRate.middle.toLowerCase();
+const bad = feedbackRate.negative.toLowerCase();
+
 export default class App extends Component {
   static defaultProps = {
     step: 1,
-    good: 0,
-    neutral: 0,
-    bad: 0,
+    [good]: 0,
+    [neutral]: 0,
+    [bad]: 0,
   };
 
   static propTypes = {
     step: PropTypes.number,
-    good: PropTypes.number,
-    neutral: PropTypes.number,
-    bad: PropTypes.number,
+    [good]: PropTypes.number,
+    [neutral]: PropTypes.number,
+    [bad]: PropTypes.number,
   };
 
   state = {
-    good: this.props.good,
-    neutral: this.props.neutral,
-    bad: this.props.bad,
+    [good]: this.props[good],
+    [neutral]: this.props[neutral],
+    [bad]: this.props[bad],
   };
 
   handleIncrement = e => {
-    switch (e.currentTarget.textContent) {
-      case feedbackRate.positive:
-        this.setState(state => ({ good: state.good + this.props.step }));
-        return;
-      case feedbackRate.middle:
-        this.setState(state => ({ neutral: state.neutral + this.props.step }));
-        return;
-      case feedbackRate.negative:
-        this.setState(state => ({ bad: state.bad + this.props.step }));
-        return;
-      default:
-        alert('Please check default settings');
-    }
+    const pushedButton = e.currentTarget.textContent.toLowerCase();
+    
+    this.setState(state => ({
+      [pushedButton]: state[pushedButton] + this.props.step,
+    }));
   };
 
   countTotalFeedback = () =>
-    this.state.good + this.state.neutral + this.state.bad;
+    this.state[good] + this.state[neutral] + this.state[bad];
 
   countPositiveFeedbackPercentage = () =>
     this.countTotalFeedback() === 0
       ? 0
-      : (this.state.good * 100) / this.countTotalFeedback();
+      : (this.state[good] * 100) / this.countTotalFeedback();
 
   render() {
     const total = this.countTotalFeedback();
@@ -67,7 +63,7 @@ export default class App extends Component {
             <Notification message="No feedback given" />
           ) : (
             <Statistics
-              {...this.state}
+              data={this.state}
               total={total}
               positivePercentage={positivePercentage}
             />

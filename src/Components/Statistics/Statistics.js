@@ -3,16 +3,16 @@ import feedbackRate from './../feedbackRate';
 import styles from './Statistics.module.css';
 
 
-const Statistic = ({ good, neutral, bad, total, positivePercentage }) => (
+const Statistic = ({ data, total, positivePercentage }) => (
   <div className={styles.wrapper}>
     <span>
-      {feedbackRate.positive}: {good}
+      {feedbackRate.positive}: {data[feedbackRate.positive.toLowerCase()]}
     </span>
     <span>
-      {feedbackRate.middle}: {neutral}
+      {feedbackRate.middle}: {data[feedbackRate.middle.toLowerCase()]}
     </span>
     <span>
-      {feedbackRate.negative}: {bad}
+      {feedbackRate.negative}: {data[feedbackRate.negative.toLowerCase()]}
     </span>
     <span>
       {feedbackRate.general}: {total}
