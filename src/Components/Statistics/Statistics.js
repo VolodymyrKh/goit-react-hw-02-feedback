@@ -1,18 +1,19 @@
 import React from 'react';
 import feedbackRate from './../feedbackRate';
+import PropTypes from 'prop-types';
 import styles from './Statistics.module.css';
 
 
-const Statistic = ({ data, total, positivePercentage }) => (
+const Statistic = ({ good, neutral, bad, total, positivePercentage }) => (
   <div className={styles.wrapper}>
     <span>
-      {feedbackRate.positive}: {data[feedbackRate.positive.toLowerCase()]}
+      {feedbackRate.positive}: {good}
     </span>
     <span>
-      {feedbackRate.middle}: {data[feedbackRate.middle.toLowerCase()]}
+      {feedbackRate.middle}: {neutral}
     </span>
     <span>
-      {feedbackRate.negative}: {data[feedbackRate.negative.toLowerCase()]}
+      {feedbackRate.negative}: {bad}
     </span>
     <span>
       {feedbackRate.general}: {total}
@@ -23,5 +24,11 @@ const Statistic = ({ data, total, positivePercentage }) => (
 
   </div>
 );
+
+Statistic.propTypes ={
+  total: PropTypes.func.isRequired,
+  positivePercentage: PropTypes.func.isRequired,
+
+}
 
 export default Statistic;
