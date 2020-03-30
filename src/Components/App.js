@@ -4,11 +4,6 @@ import Section from './Section/Section';
 import FeedbackOptions from './FeedbackOptions/FeedbackOptions';
 import Statistics from './Statistics/Statistics';
 import Notification from './Notification/Notification';
-// import feedbackRate from './feedbackRate';
-
-// const good = feedbackRate.positive.toLowerCase();
-// const neutral = feedbackRate.middle.toLowerCase();
-// const bad = feedbackRate.negative.toLowerCase();
 
 export default class App extends Component {
   static defaultProps = {
@@ -52,11 +47,14 @@ export default class App extends Component {
       this.countPositiveFeedbackPercentage(),
     );
     const options = Object.keys(this.state);
-   
+
     return (
       <>
         <Section title="Please leave your feedback">
-          <FeedbackOptions options={options} onIncrement={this.handleIncrement} />
+          <FeedbackOptions
+            options={options}
+            onIncrement={this.handleIncrement}
+          />
         </Section>
 
         <Section title="Statistics">
